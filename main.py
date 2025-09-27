@@ -31,7 +31,7 @@ def main():
         print("ERROR")
     
     else:
-        if sys.argv[3] == '--verbose':
+        if len(sys.argv) > 2 and sys.argv[3] == '--verbose':
             
             print(f'User prompt:{response.text}')
             
