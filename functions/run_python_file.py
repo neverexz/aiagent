@@ -1,7 +1,8 @@
 import os 
 import subprocess
+from google.genai import types
 
-def run_python_file(working_directory: str, file_path: str, args: str = ""):
+def run_python_file(working_directory: str, file_path: str, args = []):
     
     abs_working_dir = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
@@ -16,8 +17,10 @@ def run_python_file(working_directory: str, file_path: str, args: str = ""):
         return f'Error: "{file_path}" is not a Python file.'
     
     try:
+        final_args = ["python3", file_path]
+        final_args.extend(args)
         output = subprocess.run(
-            ["python3", file_path, args], 
+            final_args, 
             cwd=abs_working_dir, 
             timeout=30,
             capture_output=True
